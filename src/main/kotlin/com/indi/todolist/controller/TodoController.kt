@@ -6,6 +6,7 @@ import org.springframework.data.domain.Sort
 import org.springframework.data.web.PageableDefault
 import org.springframework.data.web.PagedResourcesAssembler
 import org.springframework.hateoas.EntityModel
+import org.springframework.hateoas.MediaTypes
 import org.springframework.hateoas.PagedModel
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
@@ -18,7 +19,7 @@ class TodoController(
         private val todoService: TodoService
 ) {
 
-    @GetMapping
+    @GetMapping(produces = ["application/json;charset=utf-8"])
     fun getList(
             @PageableDefault(
                     sort = ["id"],
