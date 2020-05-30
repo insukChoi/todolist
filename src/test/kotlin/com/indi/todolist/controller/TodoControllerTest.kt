@@ -20,7 +20,7 @@ internal class TodoControllerTest
         }.andExpect {
             status { isOk }
             jsonPath("$._links.self") { exists() }
-            jsonPath("$._embedded.todoList.length()") { value(3) }
+            jsonPath("$._embedded.todos.length()") { value(3) }
         }.andDo { print() }
     }
 }
