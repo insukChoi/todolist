@@ -7,13 +7,12 @@
   </div>
 </template>
 
-
-
 <script>
   import TodoHeader from "./components/TodoHeader";
   import TodoInput from "./components/TodoInput";
   import TodoList from "./components/TodoList";
   import TodoFooter from "./components/TodoFooter";
+  import TodoDataService from "./service/TodoDataService";
 
   export default {
     data() {
@@ -22,26 +21,32 @@
       }
     },
     created() {
-      if (localStorage.length > 0) {
-        for (let i=0; i <localStorage.length; i++) {
-          this.todoItems.push(localStorage.key(i));
+      TodoDataService.retrieveAllTodo().then(response => {
+        const data = response.data._embedded.todos;
+        for (let i=0; i <data.length; i++) {
+          this.todoItems.push(data[i].content);
         }
-      }
+      })
     },
     methods: {
       addTodo(todoItem) {
         if (!this.todoItems.includes(todoItem)) {
-          localStorage.setItem(todoItem, todoItem);
-          this.todoItems.push(todoItem)
+          TodoDataService.addTodoItem({
+            todoItem : todoItem
+          }).then(response => {
+            this.todoItems.push(response.data.content)
+          })
         }
       },
       clearAll() {
-        localStorage.clear();
-        this.todoItems = [];
+        TodoDataService.deleteAll().then(()=>{
+          this.todoItems = [];
+        })
       },
       removeTodo(todoItem, index) {
-        localStorage.removeItem(todoItem);
-        this.todoItems.splice(index, 1);
+        TodoDataService.deleteTodo(todoItem).then(() => {
+          this.todoItems.splice(index, 1);
+        })
       }
     },
     components: {

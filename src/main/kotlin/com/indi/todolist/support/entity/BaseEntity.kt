@@ -15,15 +15,15 @@ open class BaseEntity {
     var id: Long ?= null
 
     @CreatedDate
-    var createdAt: LocalDateTime = LocalDateTime.MIN
-        private set
+    lateinit var createdAt: LocalDateTime
+        protected set
 
     @CreatedBy
     var createdBy: String = "system"
 
     @LastModifiedDate
-    var updatedAt: LocalDateTime = LocalDateTime.MIN
-        private set
+    lateinit var updatedAt: LocalDateTime
+        protected set
 
     @LastModifiedBy
     var updatedBy: String = "system"

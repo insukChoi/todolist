@@ -35,6 +35,7 @@ dependencies {
 	implementation("io.springfox:springfox-swagger-ui:3.0.0-SNAPSHOT")
 	implementation("io.springfox:springfox-data-rest:3.0.0-SNAPSHOT")
 	compileOnly("org.projectlombok:lombok")
+  compileOnly("org.modelmapper:modelmapper:2.3.8")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("com.h2database:h2")
 	annotationProcessor("org.projectlombok:lombok")

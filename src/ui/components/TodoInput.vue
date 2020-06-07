@@ -1,7 +1,7 @@
 <template>
   <div class="inputBox shadow">
-    <input type="text" v-model="newTodoItem" placeholder="할일이 무엇입니까"
-           v-on:keyup.enter="addTodo">
+    <input type="text" v-model="newTodoItem" placeholder="할일이 무엇입니까" onfocus="this.placeholder = ''" onblur="this.placeholder = '할일이 무엇입니까'"
+           v-on:keyup.enter="addTodo" />
     <span class="addContainer" v-on:click="addTodo">
       <i class="addBtn fas fa-plus" aria-hidden="true"/>
     </span>
@@ -30,6 +30,7 @@
           if (this.newTodoItem !== ""){
             const value = this.newTodoItem && this.newTodoItem.trim();
             this.$emit('addTodo', value);
+            this.newTodoItem = "";
           } else {
             this.showModal = !this.showModal
           }
