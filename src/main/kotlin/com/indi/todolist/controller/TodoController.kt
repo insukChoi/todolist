@@ -38,6 +38,7 @@ class TodoController(
                     todoService.getListAll(pageable)
             )
 
+    @ApiOperation("TODO LIST 추가")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     fun addTodo(
@@ -46,6 +47,7 @@ class TodoController(
         return todoService.addTodo(param)
     }
 
+    @ApiOperation("TODO LIST 삭제")
     @DeleteMapping("/delete/{content}")
     fun deleteTodo(
         @PathVariable content: String
@@ -53,6 +55,7 @@ class TodoController(
         return todoService.deleteTodo(content)
     }
 
+    @ApiOperation("TODO LIST 전체삭제")
     @DeleteMapping("/delete/all")
     fun deleteAllTodo() {
         return todoService.deleteAll()
